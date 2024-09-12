@@ -33,6 +33,7 @@ const loginPage = () => {
             </a>
           </div>
           <button className=" text-white bg-blue-500 m-3 rounded-md p-2 w-[11rem]">
+            {/* TODO: Implement Login with Google */}
             Login with <span className=" font-bold">Google</span>
           </button>
         </div>

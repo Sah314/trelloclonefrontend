@@ -16,8 +16,16 @@ const signupPage = () => {
         </div>
         <div className="border-2 border-blue-500 h-auto w-[28rem] rounded-md flex flex-col items-center justify-center">
           <form className="flex flex-col gap-4 p-3 m-3 w-full">
-            <input type="text" placeholder="First Name" className="border-2 p-2" />
-            <input type="text" placeholder="Last Name" className="border-2 p-2" />
+            <input
+              type="text"
+              placeholder="First Name"
+              className="border-2 p-2"
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              className="border-2 p-2"
+            />
             <input type="text" placeholder="Email" className="border-2 p-2" />
             <input
               type="password"
@@ -38,6 +46,7 @@ const signupPage = () => {
             </a>
           </div>
           <button className=" text-white bg-blue-500 m-3 rounded-md p-2 w-[11rem]">
+            {/* TODO: Implement Signup with Google */}
             Signup with <span className=" font-bold">Google</span>
           </button>
         </div>
