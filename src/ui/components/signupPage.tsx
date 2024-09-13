@@ -10,14 +10,18 @@ const SignupPage = () => {
    const responseMessage = (response :CredentialResponse) => {
     const cred = response.credential
     console.log(cred);
-    axios.post("http://localhost:8081/api/google", { token:cred }).then((res) => {
-     console.log(res.data);
-     localStorage.setItem("token", res.data.token);
-     if(res.status === 200) {
-       console.log("Login successful");
-       router.push("/board/" + res.data.user.toString());
-     }
-   });
+    axios
+      .post(`${process.env.NEXT_PUBLIC_DEVELOPMENT_URL}/api/google`, {
+        token: cred,
+      })
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("token", res.data.token);
+        if (res.status === 200) {
+          console.log("Login successful");
+          router.push("/board/" + res.data.user.toString());
+        }
+      });
   }
    const errorMessage = () => {
      console.log("An error occurred during Google login.");
