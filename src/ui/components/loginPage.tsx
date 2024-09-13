@@ -1,8 +1,32 @@
-import React from 'react'
+"use client";
+import React from "react";
+//type Props = {}
+import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 //type Props = {}
 
-const loginPage = () => {
+const LoginPage = () => {
+  const router = useRouter();
+  const responseMessage = (response: CredentialResponse) => {
+    const cred = response.credential;
+    console.log(cred);
+    axios
+      .post("http://localhost:8081/api/google", { token: cred })
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("token", res.data.token);
+        if (res.status === 200) {
+          console.log("Login successful");
+          router.push("/board/" + res.data.user.toString());
+        }
+      });
+  };
+  const errorMessage = () => {
+    console.log("An error occurred during Google login.");
+  };
+
   return (
     <section>
       <div className="flex flex-row h-10 bg-blue-500 justify-between">
@@ -27,19 +51,20 @@ const loginPage = () => {
             <button className="bg-blue-500 text-white p-2">Login</button>
           </form>
           <div className="m-1">
-            Don't have an account?{" "}
-            <a href="#" className="text-blue-500">
+            Don`&apos;`t have an account?{" "}
+            <a href="/" className="text-blue-500">
               Signup
             </a>
           </div>
           <button className=" text-white bg-blue-500 m-3 rounded-md p-2 w-[11rem]">
             {/* TODO: Implement Login with Google */}
             Login with <span className=" font-bold">Google</span>
+            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
           </button>
         </div>
       </div>
     </section>
   );
-}
+};
 
-export default loginPage
+export default LoginPage;
