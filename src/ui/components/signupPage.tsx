@@ -9,15 +9,15 @@ const SignupPage = () => {
   const router  = useRouter(); 
    const responseMessage = (response :CredentialResponse) => {
     const cred = response.credential
-    console.log(cred);
+   // console.log(cred);
     axios
       .post(`${process.env.NEXT_PUBLIC_DEVELOPMENT_URL}/api/google`, {
         token: cred,
       })
       .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("token", res.data.token);
+        console.log(res.data.token);
         if (res.status === 200) {
+          localStorage.setItem("token", res.data.token);
           console.log("Login successful");
           router.push("/board/" + res.data.user.toString());
         }

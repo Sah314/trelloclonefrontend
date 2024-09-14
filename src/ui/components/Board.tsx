@@ -4,8 +4,8 @@ import CardColumn from "./cardColumn";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-//import { data } from "@/app/data";
-//type Props = {}
+
+
 export interface CardInfo {
   id: number;
   createdAt: string;
@@ -59,9 +59,12 @@ console.log("col:::",data);
      };
 
      const handleStop = (result: DropResult) => {
-       // axios.patch(`${process.env.NEXT_PUBLIC_DEVELOPMENT_URL}/task/${result.draggableId}`).then((response) => {
-
-       // });
+      // console.log("URL::",
+      //   `${process.env.NEXT_PUBLIC_DEVELOPMENT_URL}/task/${result.draggableId}`
+      // );
+      // console.log("taskstatus::", result.destination?.droppableId);
+      
+       console.log("Stop", result);
 
        console.log("Stop", result);
        const { source, destination } = result;
@@ -74,6 +77,29 @@ console.log("col:::",data);
        )
          return;
 
+
+       const taskId = result.draggableId.split("_")[2];  
+       console.log("TaskId::",taskId);
+      axios
+        .patch(
+          `${process.env.NEXT_PUBLIC_DEVELOPMENT_URL}/task/${taskId}`,
+          {
+            taskstatus: result.destination?.droppableId,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.status);
+          if (response.status === 200) {
+            console.log("Task status updated");
+            // Handle the response
+          }
+        });
        const sourceColumn = columns.filter(
          (card: CardInfo) =>
            card.taskstatus.toLowerCase() === source.droppableId.toLowerCase()
@@ -104,8 +130,6 @@ const createNewTask = () => {
   router.push("/board/addTask");
   }
 
-
-
   return (
     <section className=" overflow-x-hidden w-full">
       <div className="flex flex-row h-10 bg-blue-500 justify-between">
@@ -131,9 +155,9 @@ const createNewTask = () => {
             onDragEnd={handleStop}
             onDragUpdate={handleDrag}
           >
-            <CardColumn Heading="Todo" cardInfo={columns} />
-            <CardColumn Heading="InProgress" cardInfo={columns} />
-            <CardColumn Heading="Done" cardInfo={columns} />
+            <CardColumn Heading="TODO" cardInfo={columns} />
+            <CardColumn Heading="INPROGRESS" cardInfo={columns} />
+            <CardColumn Heading="DONE" cardInfo={columns} />
           </DragDropContext>
         </div>
       </div>

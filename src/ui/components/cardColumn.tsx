@@ -24,7 +24,7 @@ const CardColumn = ({Heading,cardInfo}:{Heading:string, cardInfo:CardInfo[]}) =>
             filteredCards.map((info, index) => (
               <Draggable
                 key={info.id}
-                draggableId={`${Heading}_draggable${info.id}`}
+                draggableId={`${Heading}_draggable_${info.id}`}
                 index={index}
               >
                 {(provided) => (
@@ -35,10 +35,11 @@ const CardColumn = ({Heading,cardInfo}:{Heading:string, cardInfo:CardInfo[]}) =>
                   >
                     <Card
                       key={info.id}
-                      cardId={info.id.toString()}
+                      title={info.title}
                       description={info.description}
-                      dateCreated={info.createdAt}
-                    />
+                      createdAt={info.createdAt} 
+                      id={info.id} 
+                      taskstatus={info.taskstatus}/>
                   </div>
                 )}
               </Draggable>
