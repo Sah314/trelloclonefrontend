@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
-import { CardInfo } from "@/ui/components/Board";
+import { CardInfo } from "@/components/Board";
 export default function ViewTask() {
   const taskId = useParams();
   const [task, setTask] = useState<CardInfo>(); // Initialize task as null to fetch the data

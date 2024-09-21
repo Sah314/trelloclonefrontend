@@ -1,9 +1,8 @@
-import LoginPage from "@/ui/components/loginPage";
-
+import SignupPage from "@/components/signupPage";
 export default function Login() {
   return (
     <div className=" font-[family-name:var(--font-geist-sans)]">
-      <LoginPage />
+      <SignupPage />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import Board from "@/ui/components/Board";
+import Board from "@/components/Board";
 import { useParams } from "next/navigation";
 
 export default function UserBoard() {
@@ -8,7 +8,7 @@ export default function UserBoard() {
 console.log("The userID is: ",userId.userId);
   return (
     <div className="board-container">
-      <Board userId={parseInt(userId.userId[0])} />
+      <Board userId={userId.userId[0]} />
       {/* Pass the slug to the Board component */}
     </div>
   );

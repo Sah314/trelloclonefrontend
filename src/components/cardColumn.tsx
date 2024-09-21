@@ -15,9 +15,9 @@ const CardColumn = ({Heading,cardInfo}:{Heading:string, cardInfo:CardInfo[]}) =>
           key={Heading}
           ref={provided.innerRef}
           {...provided.droppableProps}
-          className="shadow-md flex flex-col h-full w-auto px-4 gap-3 rounded-sm"
+          className="flex flex-col h-full w-full px-4 gap-3 rounded-sm"
         >
-          <div className="bg-blue-400 text-xl font-bold">
+          <div className="text-xl font-bold rounded-md">
             <p className="p-1">{Heading}</p>
           </div>
           {filteredCards.length > 0 ? (
