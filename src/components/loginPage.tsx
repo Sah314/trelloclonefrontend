@@ -77,6 +77,13 @@ import Loader from "./Loader/loader";
 
       console.log(response);
       console.log(response.status);
+       if (response.status === 200) {
+         console.log("Login successful");
+         //  if (response.data.user.role === "admin") {
+         //    router.push("/admin");
+         //  }
+         router.push("/board/" + response.data.result.user.id);
+       }
     }
 
     React.useEffect(() => { 
