@@ -39,9 +39,11 @@ import Loader from "./Loader/loader";
       const cred = response.credential;
       //console.log(cred);
       axios
-        .post("http://localhost:8081/api/google", { token: cred })
+        .post(`${process.env.NEXT_PUBLIC_DEVELOPMENT_URL}/api/google`, {
+          token: cred,
+        })
         .then((res) => {
-          console.log("Token:",res.data.result.token);
+          console.log("Token:", res.data.result.token);
           console.log("userid:", res.data.result.user.id);
           localStorage.setItem("token", res.data.result.token);
           if (res.status === 200) {
