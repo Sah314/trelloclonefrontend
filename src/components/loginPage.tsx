@@ -102,7 +102,7 @@ import Loader from "./Loader/loader";
                   //  if (response.data.user.role === "admin") {
                   //    router.push("/admin");
                   //  }
-                   router.push("/board/" + response.data.result.id.toString());
+                   router.push("/board/" + response.data.result.user.id);
                  }
         }
 
