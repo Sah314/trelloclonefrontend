@@ -79,6 +79,7 @@ import Loader from "./Loader/loader";
       console.log(response.status);
        if (response.status === 200) {
          console.log("Login successful");
+         localStorage.setItem("token", response.data.token);
          //  if (response.data.user.role === "admin") {
          //    router.push("/admin");
          //  }
